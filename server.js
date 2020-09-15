@@ -44,7 +44,7 @@ app.get('*', function(req, res){
 });
 
 
-app.listen(3000 || process.env.PORT, () => {
+app.listen(process.env.postBatchResumeToken || 3000, () => {
     console.log('listening');
 });
 
