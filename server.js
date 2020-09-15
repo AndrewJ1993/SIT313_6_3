@@ -7,7 +7,7 @@ require('dotenv').config()
 // var passport = require('passport');
 // var session = require('express-session');
 
-var app = express();
+var app = express({ useUnifiedTopology: true });
 
 
 // Database connection.
