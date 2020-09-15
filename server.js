@@ -7,11 +7,11 @@ require('dotenv').config()
 // var passport = require('passport');
 // var session = require('express-session');
 
-var app = express({ useUnifiedTopology: true });
+var app = express();
 
 
 // Database connection.
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useFindAndModify: false});
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
 var database = mongoose.connection;
 
 // app.use
@@ -44,7 +44,7 @@ app.get('*', function(req, res){
 });
 
 
-app.listen(process.env.postBatchResumeToken || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('listening');
 });
 
