@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 // Google login imports
-var passport = require('passport');
-var session = require('express-session');
+// var passport = require('passport');
+// var session = require('express-session');
 
 var app = express();
 
@@ -21,14 +21,14 @@ app.use('/bootstrap-select-country', express.static(__dirname + '/node_modules/b
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // Google login app.uses
-app.use(session({
-    cookie:{MaxAge: 1200000,
-    resave: false,
-    saveUninitialized: false,
-    secret: 'SampleSecret'}
-}))
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(session({
+//     cookie:{MaxAge: 1200000,
+//     resave: false,
+//     saveUninitialized: false,
+//     secret: 'SampleSecret'}
+// }))
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
 // Routes.
