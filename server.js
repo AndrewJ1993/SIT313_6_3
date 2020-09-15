@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+require('dotenv').config()
 
 // Google login imports
 // var passport = require('passport');
@@ -10,9 +11,8 @@ var app = express();
 
 
 // Database connection.
-mongoose.connect('mongodb://localhost/iCrowdTaskDb', {useNewUrlParser: true, useFindAndModify: false});
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useFindAndModify: false});
 var database = mongoose.connection;
-
 
 // app.use
 app.use(express.static('public'));
