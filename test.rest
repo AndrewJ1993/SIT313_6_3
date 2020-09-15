@@ -1,0 +1,96 @@
+POST http://localhost:3000/requesters
+Content-Type: application/json
+
+{
+        "first_name": "Andrew", 
+        "last_name": "Jarrett", 
+        "email": "ajarrett@deakin.edu.au", 
+        "password": "tes1234t123", 
+  "confirm": "tes1234t123",
+        "address_line_1": "123 Fake St",
+       "city": "Nowra", 
+        "state": "NSW", 
+        "country": "AUS", 
+        "postal_code": "1234",
+"mobile_number": "+61456878909"
+}
+
+###
+
+GET http://localhost:3000/requesters/
+
+###
+
+// Workers tests.
+GET http://localhost:3000/workers
+
+###
+
+POST http://localhost:3000/workers
+Content-Type: application/json
+
+{
+  "first_name": "Andrew",
+  "last_name": "Jarrett",
+  "email": "ajarrett@deakin.edu.au",
+  "password": "test123456",
+  "confirm": "test123456",
+  "address_line_1": "123 Fake St",
+  "city": "Nowra",
+  "state": "NSW",
+  "country": "AUS",
+  "postal_code": "1234",
+  "mobile_number": "+61412765642"
+}
+
+###
+
+DELETE http://localhost:3000/workers
+
+###
+
+GET http://localhost:3000/workers/5f588aff4e393918c87ab34e
+
+###
+
+PATCH http://localhost:3000/workers/5f588aff4e393918c87ab34e
+Content-Type: application/json
+
+{
+  "first_name": "Bradley",
+  "last_name": "Smith",
+  "email": "brad_smith@deakin.edu.au",
+  "address_line_1": "456 hello street",
+  "address_line_2": "testing street 2",
+  "city": "Sydney",
+  "state": "NSW",
+  "country": "AUS",
+  "postal_code": "1234",
+  "mobile_number": "+61412765642"
+}
+###
+
+DELETE http://localhost:3000/workers/5f588aff4e393918c87ab34e
+
+###
+
+###
+
+PATCH http://localhost:3000/workers/5f588aff4e393918c87ab34e
+Content-Type: application/json
+
+{
+  "first_name": "Bradley",
+  "last_name": "Smith",
+  "email": "brad_smith@deakin.edu.au",
+  "address_line_1": "456 hello street",
+"address_line_2": "testing street 2",
+  "city": "Canberra",
+  "state": "ACT",
+  "country": "AUS",
+  "postal_code": "1234",
+  "mobile_number": "+61412765642"
+}
+
+
+###

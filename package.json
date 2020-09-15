@@ -1,0 +1,28 @@
+{
+  "name": "icrowdtask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrew Jarrett",
+  "license": "ISC",
+  "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.14",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^3.4.1",
+    "bootstrap-select": "^1.13.18",
+    "bootstrap-select-country": "^4.2.0",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jquery": "^3.5.1",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.10.0",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
+    "validator": "^13.1.1"
+  }
+}

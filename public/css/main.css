@@ -1,0 +1,19 @@
+#first-name, #city
+{
+    position: absolute;
+    left:0%;
+    width: 50%;
+}
+
+#last-name, #state
+{
+    position: absolute;
+    left: 50%;
+    width: 50%;
+}
+
+label[for=last-name], label[for=state]
+{
+    position: absolute;
+    left: 50%;
+}

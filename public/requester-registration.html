@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Bootstrap Core Css -->
+    <link rel="stylesheet" href="./public/css/main.css">
+    <meta charset="UTF-8">
+    <title>Requester Registration</title>
+    
+    <!-- Boostrap code -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css" />
+
+
+    <link rel="stylesheet" href="bootstrap-select-country/css/bootstrap-select-country.min.css" />
+
+    <link rel="stylesheet" href="./css/main.css" />
+
+
+</head>
+<body>
+
+
+    <div class="container">
+<div class="row justify-content-center">
+                    <div class="col-md-8">
+
+                        <h1>Requester Registration</h1>
+                        <br>
+                        <h3>Create an iCrowdTask Account</h3>
+                        <div class="card">
+                            <div class="card-header">Register</div>
+                            <div class="card-body">
+
+                                <form class="form-horizontal" method="post" action="/requesters">
+
+                                    <!-- Name section -->
+                                    <div class="form-group">
+                                        <label for="first-name" class="cols-sm-2 control-label">First Name *</label>
+                                        <label for="last-name" class="cols-sm-2 control-label">Last Name *</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="first_name" 
+                                                       id="first-name" placeholder="Enter your first name" />
+                                                <input type="text" class="form-control" name="last_name" 
+                                                       id="last-name" placeholder="Enter your last name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Email section -->
+                                    <div class="form-group">
+                                        <label for="email" class="cols-sm-2 control-label">Email *</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="email" id="email" placeholder="Enter your Email" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Password section -->
+                                    <div class="form-group">
+                                        <label for="password" class="cols-sm-2 control-label">Password *</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirm" class="cols-sm-2 control-label">Confirm Password *</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                                <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <!-- Country section -->
+                                    <div class="form-group">
+                                        <label for="country" class="cols-sm-2 control-label">Country *</label>
+                                        <div class="cols-sm-10">
+                                                <select class="selectpicker countrypicker" data-default="AU" 
+                                                        id="country" name="country"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                            <!-- Address section -->
+                            <div class="form-group">
+                                <label for="address-line-1" class="cols-sm-2 control-label">Address *</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span 
+                                                class="input-group-addon"><i class="fa fa-address-card" 
+                                                                             aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="address_line_1"
+                                               id="address-line-1" placeholder="Enter address line 1" />
+                                        <input type="text" class="form-control" name="address_line_2"
+                                               id="address-line-2" placeholder="Enter address line 2 if valid" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="city" class="cols-sm-2 control-label">City *</label>
+                              <label for="state" class="cols-sm-2 control-label">State *</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span 
+                                                class="input-group-addon"><i class="fa fa-address-card" 
+                                                                             aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="city"
+                                               id="city" placeholder="Enter your city" />
+                                        <input type="text" class="form-control" name="state"
+                                               id="state" placeholder="Enter your state" />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <label for="postal-code" class="cols-sm-2 control-label">ZIP / Postal Code</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span 
+                                                class="input-group-addon"><i class="fa fa-address-card" 
+                                                                             aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="postal_code"
+                                               id="postal-code" placeholder="Enter ZIP/Postal code" />
+                                    </div>
+                                </div>
+                            <br>
+                            
+                            <!-- Mobile phone number -->
+                            <div class="form-group">
+                                <label for="mobile-number" class="cols-sm-2 control-label">Mobile Phone Number</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span 
+                                                class="input-group-addon"><i class="fa fa-address-card" 
+                                                                             aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="mobile_number"
+                                               id="mobile-number" placeholder="Enter mobile phone number" />
+                                    </div>
+                                </div>
+                            </div>
+                                    <div class="form-group ">
+                                        <button type="submit" 
+                                                class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+</div>
+    <!--Scripts-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+    <script src="bootstrap-select-country/js/bootstrap-select-country.min.js"></script>
+</body>
+</html>
