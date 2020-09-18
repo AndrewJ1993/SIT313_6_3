@@ -17,7 +17,9 @@ mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useFindAndModi
 var database = mongoose.connection;
 
 // app.use
+
 app.use(express.static('public'));
+
 app.use(express.json());
 app.use('/bootstrap-select-country', express.static(__dirname + '/node_modules/bootstrap-select-country/dist/'));
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -50,7 +52,7 @@ var isLoggedIn = (req, res, next) => {
         next();
     }
     else {
-        res.status(401).json({message: "You are not logged in."});
+        res.status(401).json({message: 'You are not logged in'})
     }
 }
 
@@ -58,14 +60,23 @@ var isLoggedIn = (req, res, next) => {
 app.get('/', (req, res) => {
     res.sendFile('public/index.html');
 });
+
+app.get('/requester-login', (req, res) => {
+    if (req.user) {
+        res.sendFile(__dirname + '/public/index.html');
+    }
+    else {
+        res.sendFile(__dirname + '/public/requester-login.html')
+    }
+});
 var requestersRouter = require('./routes/requesters');
 app.use('/requesters', requestersRouter);
 var workersRouter = require('./routes/workers');
 app.use('/workers', workersRouter);
 
-// // Test route to see if logged in and all working properly.
-// app.get('/good', isLoggedIn,  (req, res) => {res.redirect('/index.html')});
-// // Logs the user out.
+// Test route to see if logged in and all working properly.
+app.get('/good', isLoggedIn,  (req, res) => {res.send({message: 'You are logged in'})});
+// Logs the user out.
 app.get('/logout', (req,  res) => {
     req.session.destroy();
     res.redirect('/');
