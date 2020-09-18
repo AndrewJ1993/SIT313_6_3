@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(session({
         resave: true,
         saveUninitialized: true,
-        secret: '6969090010a401438be2960f0ff760c0',
+        secret: <secret_here>,
         cookie: {
             maxAge: 30 * 60 * 1000 // Thirty minute session timers by default.
         },
