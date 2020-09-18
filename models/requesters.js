@@ -61,6 +61,11 @@ var requestersSchema = new mongoose.Schema({
             }
         }
     },
+    "reset_email_token": {
+        "type": "string",
+        "required": false,
+        expires: '2m'
+    }
 });
 
 module.exports = mongoose.model('requesters', requestersSchema);

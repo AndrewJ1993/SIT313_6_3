@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Sign in</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+
 </head>
 <body>
 <br><br><br>
@@ -18,18 +21,27 @@
 <article class="card-body">
 <a href="/requester-registration.html" class="float-right btn btn-outline-primary">Sign up</a>
 <h4 class="card-title mb-4 mt-1">Sign in</h4>
-	 <form action="/requesters/{email}" method="POST">
+	 <form action="/requesters/{email}" method="POST" id="form">
     <div class="form-group">
     	<label>Your email</label>
-        <input name="email" class="form-control" placeholder="Email" type="email">
+        <input name="email" class="form-control" placeholder="Email" type="email" id="email">
     </div> <!-- form-group// -->
     <div class="form-group">
     	<label>Your password</label>
         <input class="form-control" placeholder="******" type="password" name="password">
     </div> <!-- form-group// --> 
+         <input type="checkbox" value="yes" id="save" name="save"> <label for="save">Save 
+         password</label>
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block"> Login  </button>
     </div> <!-- form-group// -->                                                           
+         <div><a class="btn btn-outline-dark btn-block" href="/google" role="button" 
+                         style="text-transform:none">
+      <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+      Login with Google
+    </a></div>
+         <br>
+         <p class="text-center"><a href="/forgot-password.html" class="btn">Forgot password?</a></p>
 </form>
 </article>
 </div> <!-- card.// -->

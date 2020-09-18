@@ -3,30 +3,19 @@ var router = express.Router();
 var Requesters = require('../models/requesters');
 var mailchimp = require("@mailchimp/mailchimp_marketing");
 var bcrypt = require('bcrypt');
+var md5 = require('md5');
+var crypto = require('crypto');
+require('../passport-setup');
+var passport = require('passport');
 
-// var passport = require('passport');
-// var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
-//
-// // Use the GoogleStrategy within Passport.
-// //   Strategies in passport require a `verify` function, which accept
-// //   credentials (in this case, a token, tokenSecret, and Google profile), and
-// //   invoke a callback with a user object.
-// passport.use(new GoogleStrategy({
-//     consumerKey: GOOGLE_CONSUMER_KEY,
-//     consumerSecret: GOOGLE_CONSUMER_SECRET,
-//     callbackURL: "http://www.example.com/auth/google/callback"
-//   },
-//   function(token, tokenSecret, profile, done) {
-//       User.findOrCreate({ googleId: profile.id }, function (err, user) {
-//         return done(err, user);
-//       });
-//   }
-// ));
 
 mailchimp.setConfig({
   apiKey: "fac41340a0196786da6ef7c3ddc17a13-us17",
   server: "us17"
 });
+
+const listId = "0be15b2fdb";
+
 
 // Creating an item.
 router.post('/', checkEmail, async (req, res) => {
@@ -47,7 +36,6 @@ router.post('/', checkEmail, async (req, res) => {
         })
         try {
             // Basic information for MailChimp.
-            const listId = "0be15b2fdb";
             const subscribingUser = {
               firstName: req.body.first_name,
               lastName: req.body.last_name,
@@ -79,23 +67,100 @@ router.post('/', checkEmail, async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         var requesters = await Requesters.find();
-        res.json(requesters);
+        await res.json(requesters);
     }
     catch (error) {
         res.status(500).json({message: error.message});
     }
 })
 
-// Post function that is used to check whether the email and password combination exists in the
-// mongo data base.
-router.post('/:email', checkEmail, (req, res) => {
-    if (bcrypt.compareSync(req.body.password, res.checkRequester.password)) {
-        res.send("You are logged in");
+
+// GET /google/auth
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  If authentication fails, the user will be redirected back to the
+//   login page.  Otherwise, the primary route function function will be called,
+//   which, in this example, will redirect the user to the home page.
+router.get('/google/auth',
+    passport.authenticate('google', { failureRedirect: '/requester-login.html' }),
+    function(req, res) {
+        res.redirect('/index.html');
+    });
+
+
+
+
+router.post('/:email', passport.authenticate('local',  {
+    failureRedirect: '/requester-login.html'
+
+}), function (req, res) {
+    if (req.body.save) {
+        req.session.cookie.maxAge = 365 * 24 * 60 * 60 * 1000;
+        console.log(req.session.cookie.maxAge);
     }
-    else {
-        res.send("Login failed.");
+    res.redirect('/');
+});
+
+router.post('/reset-password/:email', checkEmail, async(req, res) => {
+    if (res.checkRequester) {
+        var subscriberEmail = res.checkRequester.email
+        var token = crypto.randomBytes(20).toString('hex');
+        var subscriberHash = md5(subscriberEmail.toLowerCase());
+        var options = {
+            name: "reset_password",
+            properties: {
+                subscriberEmail,
+                token
+        }
+    };
+        res.checkRequester.reset_email_token = token;
+        console.log("token set: " + res.checkRequester.reset_email_token);
+        
+        var changedRequester = await res.checkRequester.save();
+        resetPasswordEvent(subscriberHash, options);
+        
+    }
+    res.send('Reset password email sent.<br><a href="/requester-login.html">Back to Login</a>');
+})
+
+
+router.post('/password-confirm/:email', async(req, res) => {
+    try {
+        var requester = await Requesters.findOne({email: req.params.email});
+        if (requester.reset_email_token == req.body.token) {
+            // Checks that the new password is the same as confirm password.
+            if (req.body.password != null || req.body.confirm != null) {
+                if (req.body.password == req.body.confirm) {
+                    if (req.body.password.length >= 8) {
+                        requester.password = bcrypt.hashSync(req.body.password, 10);
+                        var changedRequester = await requester.save();
+                        await res.redirect('/requester-login.html');
+                    }
+                    else {
+                        await res.status(400).json({message: "Password must be at least 8 characters in length."})
+                    }
+                } else {
+                    await res.status(400).json({message: "Password and confirm password do not match"});
+                    return;
+                }
+            }
+        }
+        else {
+            res.send("Token is out of date. Reset password again.");
+        }
+    }
+    catch (error) {
+        await res.status(500).json({message: error.message});
     }
 })
+
+async function resetPasswordEvent(subscriberHash, options) {
+  var response = await mailchimp.lists.createListMemberEvent(
+    listId,
+    subscriberHash,
+    options
+  );
+}
+
 
 
 async function addToEmailList(listId, subscribingUser) {
