@@ -21,7 +21,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
         clientID: '868565993431-ofumsp7s1peqt2i04p70mgruj58t64bc.apps.googleusercontent.com',
         clientSecret: 'rbhWocF3IMZ_H2YCRBvFcTC4',
-        callbackURL: "http://localhost:3000/requesters/google/auth"
+        callbackURL: "https://icrowdtasker.herokuapp.com/requesters/google/auth"
     },
     function(accessToken, refreshToken, profile, done) {
         console.log(profile._json.email);
