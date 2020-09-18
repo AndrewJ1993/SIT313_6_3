@@ -10,7 +10,7 @@ var passport = require('passport');
 
 
 mailchimp.setConfig({
-  apiKey: "fac41340a0196786da6ef7c3ddc17a13-us17",
+  apiKey: <api_key>,
   server: "us17"
 });
 
